@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4c093757-a833-44e6-b9db-35ba8c892873" name="LocalHost" url="http://socialscience.local">
+        <fileTransfer port="0" mountedRoot="C:\xampp\www\instagramBot\download" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>
