@@ -47,3 +47,14 @@ function wirte_comment_to_the_file($base_data_dir, $media_cms, $media_id)
 }
 
 
+function read_accounts_from_file($accounts_files_path)
+{
+    $acc_list = [];
+    if ($acc_f = fopen($accounts_files_path, "r")) {
+        print("in the if \n");
+        for($i =0; !feof($acc_f); $i++)
+            $acc_list[$i] = trim(fgets($acc_f));
+    }
+    return $acc_list;
+}
+
