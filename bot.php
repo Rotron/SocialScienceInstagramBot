@@ -1,8 +1,7 @@
 <?php
 
 require __DIR__ . '\vendor\autoload.php';
-require __DIR__ . 'file_util.php';
-
+require __DIR__ . '\file_util.php';
 
 function getAllUserPosts($instagram_account, $_user_id)
 {
@@ -42,78 +41,58 @@ function getCustomComments($instagram_account, $media, $prcnt_of_cms)
     $cm_helper = null;
     $next_max_id = null;
     $pg_num = 0;
-    $total_cms = $media->getCommentCount();
-    print($total_cms . "\n");
-    $cm_per_page = 20;
-    $max_cm_number = ceil(($prcnt_of_cms / 100) * $total_cms);
-    print($max_cm_number . "\n");
-    print("\n all pages : -> " . $total_cms / $cm_per_page);
+
+
     do {
+        print("in the comments page : " . $pg_num . "\n");
         if (is_null($cm_helper)) {
             $cm_helper = $instagram_account->media->getComments($media->getId());
         } else {
             $cm_helper = $instagram_account->media->getComments($media->getId(), $next_max_id);
         }
         $cms = array_merge($cms, $cm_helper->getComments());
-        print("\n ___" . $pg_num . "___" . "\n");
-        print("..." . "\n");
         $pg_num++;
     } while (!is_null($next_max_id = $cm_helper->getNextMaxId()));
-    $rand_keys = array_rand($cms, $max_cm_number);
+    print("number of all the comments are : " . count($cms) . "\n");
+    $rand_keys = array_rand($cms, ceil(count($cms) * ($prcnt_of_cms / 100)));
+    print("number of rand keys are : " . count($rand_keys) . "\n");
     if (count($rand_keys) == 1)
         $rand_keys = [$rand_keys];
     for ($i = 0; $i < count($rand_keys); $i++) {
-        print("..." . "\n");
         $mod_cms[$i] = $cms[$rand_keys[$i]];
     }
-
+    print("number of modifed keys : " . count($mod_cms) . "\n");
     return $mod_cms;
 }
-
-
 
 
 $ig = new \InstagramAPI\Instagram();
 $account = getAccount("secret_file.txt");
 $a = $ig->login($account[0], $account[1]);
-$userId = $ig->people->getUserIdForName('_alizeyn');
-//$medias = $ig->timeline->getUserFeed($userId)->getItems()[0]->getUser()->getUsername()
-//$medias[0]->getMedia()->get
-//$m = $ig->media-
+$username = "_alizeyn";
+$userId = $ig->people->getUserIdForName($username);
+
+$base_data_dir = "./Data/" . $username . "/";
+if (!file_exists($base_data_dir))
+    mkdir($base_data_dir, 0777, true);
 
 try {
-
     $total_medias = getAllUserPosts($ig, $userId);
     $ordered_list = getTopLikedPosts($total_medias, 5);
 
     for ($i = 0; $i < count($ordered_list); $i++) {
-        $caption = $ordered_list[$i]->getCaption();
-        if (is_null($caption))
-            $caption = "";
-        else
-            $caption = $caption->getText();
-
-        print("-" . ($i + 1) . "-" . "\n"
-            . " caption : " . $caption . "\n"
-            . " likes : " . $ordered_list[$i]->getLikeCount() . "\n"
-            . " link : " . $ordered_list[$i]->getItemUrl() . "\n\n");
+        wirte_header_to_file($base_data_dir, $ordered_list[$i]);
         print(" Comments : " . "\n\n\n");
-        $media_cms = getCustomComments($ig, $ordered_list[$i], 1);
+        $media_cms = getCustomComments($ig, $ordered_list[$i], 100);
         $media_cms_number = count($media_cms);
         if ($media_cms_number > 0) {
-            for ($j = 0; $j < $media_cms_number; $j++) {
-                print("\n_____________comment number" . $j . "_______________ \n");
-                print("username : " . $media_cms[$j]->getUser()->getUsername() . "\n"
-                    . "Comment   : " . $media_cms[$j]->getText() . "\n");
-                print("____________________________\n");
-            }
+            wirte_comment_to_the_file($base_data_dir, $media_cms, $ordered_list[$i]->getId());
         }
 
     }
-//    foreach ($cms as $cm)
-//        print(' - ' . $cm->getText() . " \n");
+
 } catch (Exception $e) {
     print($e->getMessage());
 }
 
-
+//$ig->timeline->getUserFeed($userId)->getItems()[0]->getMediaId()
