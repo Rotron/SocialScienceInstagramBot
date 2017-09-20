@@ -176,6 +176,8 @@ class Mqtt implements PersistentInterface
 
         $this->_shutdown = false;
         $this->_client = $this->_getClient();
+
+        $this->_sequenceId = self::INVALID_SEQUENCE_ID;
     }
 
     /** {@inheritdoc} */
@@ -430,7 +432,7 @@ class Mqtt implements PersistentInterface
             ? $experiments['ig_android_realtime_iris'] : [];
         $this->_irisEnabled = $this->_isFeatureEnabled($directFeatures, 'is_direct_over_iris_enabled');
         if (isset($directFeatures['pubsub_msg_type_blacklist'])) {
-            $this->_msgTypeBlacklist = $directFeatures['msgTypeBlacklist'];
+            $this->_msgTypeBlacklist = $directFeatures['pubsub_msg_type_blacklist'];
         }
 
         // Live features.
@@ -640,7 +642,7 @@ class Mqtt implements PersistentInterface
      */
     protected function _subscribeToIris()
     {
-        if (!$this->_irisEnabled || $this->_sequenceId === self::INVALID_SEQUENCE_ID) {
+        if (!$this->_irisEnabled || $this->_sequenceId === self::INVALID_SEQUENCE_ID || $this->_sequenceId === null) {
             return;
         }
         $this->_logger->info(sprintf('Subscribing to iris with sequence %d', $this->_sequenceId));

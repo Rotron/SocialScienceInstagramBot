@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f633a01f2acf793fb6a9da9e0d54967",
+    "content-hash": "19baf6de69c3c230ee8f39eb0a7e36cf",
     "packages": [
         {
             "name": "binsoul/net-mqtt",
@@ -452,16 +452,16 @@
         },
         {
             "name": "mgp25/instagram-php",
-            "version": "v3.0.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mgp25/Instagram-API.git",
-                "reference": "5fa36a5a32a43cd34ed6ddcedd41a04723f905f9"
+                "reference": "bd8f395e0e5ee0f4703fd2b8f6124dd473db90f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mgp25/Instagram-API/zipball/5fa36a5a32a43cd34ed6ddcedd41a04723f905f9",
-                "reference": "5fa36a5a32a43cd34ed6ddcedd41a04723f905f9",
+                "url": "https://api.github.com/repos/mgp25/Instagram-API/zipball/bd8f395e0e5ee0f4703fd2b8f6124dd473db90f8",
+                "reference": "bd8f395e0e5ee0f4703fd2b8f6124dd473db90f8",
                 "shasum": ""
             },
             "require": {
@@ -483,7 +483,7 @@
                 "valga/fbns-react": "^0.1.7"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.4",
+                "friendsofphp/php-cs-fixer": "^2.6",
                 "monolog/monolog": "^1.23",
                 "react/http": "^0.7.2"
             },
@@ -520,7 +520,7 @@
                 "php",
                 "private"
             ],
-            "time": "2017-09-06T11:01:26+00:00"
+            "time": "2017-09-20 19:07:05"
         },
         {
             "name": "netresearch/jsonmapper",
@@ -1097,7 +1097,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "mgp25/instagram-php": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

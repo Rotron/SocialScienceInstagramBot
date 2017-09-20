@@ -1,7 +1,7 @@
 <?php
 
-require __DIR__ . '\vendor\autoload.php';
-require __DIR__ . '\file_util.php';
+require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/file_util.php';
 
 function getAllUserPosts($instagram_account, $_user_id)
 {
