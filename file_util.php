@@ -27,11 +27,14 @@ function wirte_header_to_file($base_data_dir, $media)
         . "\"" . "Link" . "\"" . "," . "\"" . trim($media->getItemUrl()) . "\"" . "\n\n\n\n";
 
     file_put_contents($base_data_dir . "/" . $media->getId() . ".csv", "\xEF\xBB\xBF" . $header);
+    print($header);
 }
 
 
 function wirte_comment_to_the_file($base_data_dir, $media_cms, $media_id)
 {
+    if(count($media_cms) == 1 )
+        $media_cms = [$media_cms];
 
     $media_file = fopen($base_data_dir . "/" . $media_id . ".csv", "a");
     for ($j = 0; $j < count($media_cms); $j++) {
@@ -40,6 +43,7 @@ function wirte_comment_to_the_file($base_data_dir, $media_cms, $media_id)
             . "\"" . "Comment" . "\"" . "," . "\"" . trim($media_cms[$j]->getText()) . "\"" . "\n";
 
         fwrite($media_file, $cm_format);
+        print($cm_format);
     }
     print("\n");
     fclose($media_file);
@@ -57,4 +61,5 @@ function read_accounts_from_file($accounts_files_path)
     }
     return $acc_list;
 }
+
 
