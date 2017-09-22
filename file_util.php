@@ -39,8 +39,9 @@ function wirte_comment_to_the_file($base_data_dir, $media_cms, $media_id)
     $media_file = fopen($base_data_dir . "/" . $media_id . ".csv", "a");
     for ($j = 0; $j < count($media_cms); $j++) {
         print("___");
-        $cm_format = "\"" . "username" . "\"" . "," . "\"" . trim($media_cms[$j]->getUser()->getUsername()) . "\"" . "\n"
-            . "\"" . "Comment" . "\"" . "," . "\"" . trim($media_cms[$j]->getText()) . "\"" . "\n";
+        $cm_format = "\"" . "Username : " . "\"" . "," . "\"" . trim($media_cms[$j]->getUser()->getUsername()) . "\"" . ","
+            ."\"\"". ","
+            . "\"" . "Comment : " . "\"" . "," . "\"" . trim($media_cms[$j]->getText()) . "\"" . "\n";
 
         fwrite($media_file, $cm_format);
         print($cm_format);

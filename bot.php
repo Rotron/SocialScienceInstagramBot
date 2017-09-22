@@ -63,10 +63,8 @@ function getCustomComments($base_data_dir, $instagram_account, $media, $prcnt_of
 
     do {
         if (is_null($cm_helper)) {
-            print("getting new cm_helper ... \n");
             $cm_helper = $media_handler->getComments($media_id);
         } else {
-            print("getting new cm_helper ... \n");
             $cm_helper = $media_handler->getComments($media_id, $next_max_id);
         }
         print(".\n");
@@ -74,7 +72,6 @@ function getCustomComments($base_data_dir, $instagram_account, $media, $prcnt_of
         $cms_count_in_page = count($cms);
         $fetched_cms_count += $cms_count_in_page;
 
-        print("fetching new cms ... \n");
         print("raw cms size per page : " . count($cms) . "\n");
         print("writted comments till now : " . $writed_comments . " \n");
         if ($partion_size <= $cms_count_in_page && !$loading) {
@@ -108,7 +105,6 @@ function getCustomComments($base_data_dir, $instagram_account, $media, $prcnt_of
             print("partion size : " . $partion_size . "   comments count in the page : " . $cms_count_in_page . "\n");
             print("rand_in_partion_area : " . $rand_in_partion_area . "   fetched_cms_count : " . $fetched_cms_count . "\n");
             print("max should get comments : " . $max_cms_count . "\n");
-            print("page number : " . $pg_num . "\n");
             if ($rand_in_partion_area < $fetched_cms_count) {
                 $cm = $cms[$rand_in_partion_area - ($fetched_cms_count - $cms_count_in_page)];
                 wirte_comment_to_the_file($base_data_dir, $cm, $media_id);
@@ -122,9 +118,6 @@ function getCustomComments($base_data_dir, $instagram_account, $media, $prcnt_of
 
 
     $cms_count = count($cms);
-    print("number of comments : " . $cms_count . "\n");
-    print("number of comments 2 : " . $media->getCommentCount() . "\n");
-    print("mod comments count : " . $max_cms_count . "\n");
     $rand_keys = array_rand($cms, ceil($cms_count * ($prcnt_of_cms / 100)));
     $rand_keys_count = count($rand_keys);
     if ($rand_keys_count == 1)
@@ -150,7 +143,6 @@ foreach ($usernames as $username) {
         print($err->getMessage());
         continue;
     }
-
     $base_data_dir = "./Data/" . $username . "/";
 
     if (!file_exists($base_data_dir))
@@ -159,24 +151,16 @@ foreach ($usernames as $username) {
     try {
         $total_medias = getAllUserPosts($ig, $userId);
         $ordered_list = getTopLikedPosts($total_medias, $POST_LIMIT);
-
         for ($i = 0; $i < count($ordered_list); $i++) {
             print(".\n");
             wirte_header_to_file($base_data_dir, $ordered_list[$i]);
-//            $media_cms = getCustomComments($ig, $ordered_list[$i], 100);
             $media_cms = getCustomComments($base_data_dir, $ig, $ordered_list[$i], $COMMENT_PERCENT);
-//            $media_cms_number = count($media_cms);
-//            if ($media_cms_number > 0) {
-//                wirte_comment_to_the_file($base_data_dir, $media_cms, $ordered_list[$i]->getId());
-//            }
-
         }
-
     } catch (Exception $e) {
         print($e->getMessage());
     }
 }
+print("@@@@@@@@@@@@@@@@@@****ALL DONE*****@@@@@@@@@@@@@@@@@@");
 
-//$ig->timeline->getUserFeed($userId)->getItems()[0]->getCommentCount()
 
 
