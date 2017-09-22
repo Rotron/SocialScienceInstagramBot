@@ -2,7 +2,7 @@
 Social Science Instagram Bot is created for Social Science Research in Ferdowsi University Of Mashhad.
 You can use this bot to get desired amount of any public usernames comments.
 
-###install using composer 
+### install using composer 
 clone the project :
 
  `git clone https://github.com/zeynaliAli/SocialScienceInstagramBot`
