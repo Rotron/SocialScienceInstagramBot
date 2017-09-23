@@ -40,8 +40,9 @@ require __DIR__.'/../vendor/autoload.php';
 try {
     $debug = true;
     $ig = new \InstagramAPI\Instagram($debug);
-    $ig->login('yourusername', 'yourpassword');
-    $result = $ig->media->comment('14123451234567890_1234567890', 'Hello World');
+    $ig->setUser('yourusername', 'yourpassword');
+    $ig->login();
+    $result = $ig->comment('14123451234567890_1234567890', "Hello World");
     var_dump($result);
 } catch (\Exception $e) {
     echo $e->getMessage()."\n";

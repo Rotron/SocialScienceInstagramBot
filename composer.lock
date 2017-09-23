@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "19baf6de69c3c230ee8f39eb0a7e36cf",
+    "content-hash": "ada8745d71b29c73e703304b397fa92d",
     "packages": [
         {
             "name": "binsoul/net-mqtt",
@@ -452,16 +452,16 @@
         },
         {
             "name": "mgp25/instagram-php",
-            "version": "dev-master",
+            "version": "3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mgp25/Instagram-API.git",
-                "reference": "bd8f395e0e5ee0f4703fd2b8f6124dd473db90f8"
+                "reference": "9996d447574938b8a117cf84ac58479b78fc76fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mgp25/Instagram-API/zipball/bd8f395e0e5ee0f4703fd2b8f6124dd473db90f8",
-                "reference": "bd8f395e0e5ee0f4703fd2b8f6124dd473db90f8",
+                "url": "https://api.github.com/repos/mgp25/Instagram-API/zipball/9996d447574938b8a117cf84ac58479b78fc76fa",
+                "reference": "9996d447574938b8a117cf84ac58479b78fc76fa",
                 "shasum": ""
             },
             "require": {
@@ -520,7 +520,7 @@
                 "php",
                 "private"
             ],
-            "time": "2017-09-20 19:07:05"
+            "time": "2017-09-17T20:49:35+00:00"
         },
         {
             "name": "netresearch/jsonmapper",
@@ -1097,9 +1097,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "mgp25/instagram-php": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
